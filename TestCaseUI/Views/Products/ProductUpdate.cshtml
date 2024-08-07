@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "ProductUpdate";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+
+<form action="#" method="post" id="UpdateProduct" enctype="multipart/form-data" class="form-horizontal p-4">
+
+    <div class="row form-group">
+        <div class="col col-md-3"><label for="title" class=" form-control-label">Başlık gir</label></div>
+        <div class="col-12 col-md-9"><input type="text" id="title" name="title" placeholder="Text" class="form-control"></div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-3"><label for="description" class=" form-control-label">Açıklama</label></div>
+        <div class="col-12 col-md-9"><textarea name="description" id="description" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+
+        <div class="row form-group">
+            <div class="col col-md-3"><label for="categorySelect" class=" form-control-label">Katagori seç</label></div>
+            <div class="col-12 col-md-9">
+                <select name="categoryId" id="categorySelect" class="form-control">
+                    <option value="0">Please select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-3"><label for="stockQuantity" class=" form-control-label">Stok miktarı</label></div>
+        <div class="col-12 col-md-9"><input type="number" id="stockQuantity" name="stockQuantity" placeholder="Text" class="form-control"></div>
+    </div>
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success btn-icon-split">
+            <i class="fas fa-check"></i> Submit
+        </button>
+        <button type="reset" class="btn btn-danger btn-sm">
+            <i class="fa fa-ban"></i> Reset
+        </button>
+    </div>
+
+</form>
+
+
+
+<script>
+    $(document).ready(function () {
+        var path=window.location.pathname;
+        parts=path.split("/")
+        id=parts.pop()||parts.pop()
+        console.log(id)
+        ProductId(id)
+
+        $("#UpdateProduct").submit(function (event) {
+            event.preventDefault();
+            UpdateProduct(id)
+        })
+
+
+        // Sayfa yüklendiğinde kategorileri çek
+        $.ajax({
+            url: BASEURL + "Category",
+            type: "GET",
+            success: function (data) {
+                let categorySelect = $('#categorySelect');
+                // Mevcut seçenekleri temizle
+                categorySelect.empty();
+                // İlk boş seçeneği ekle
+                categorySelect.append('<option value="0">Please select</option>');
+
+                // Kategorileri döngü ile ekle
+                data.forEach(function (category) {
+                    categorySelect.append('<option value="' + category.id + '">' + category.name + '</option>');
+                });
+            },
+            error: function (error) {
+                console.log("Kategoriler yüklenirken hata oluştu:", error);
+            }
+        });
+    });
+</script>

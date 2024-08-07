@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Kategoriler</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Veriler</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="veriTablosu" width="100%" border="1" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ad</th>
+                            <th>Minumum Stok</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ad</th>
+                            <th>Minumum Stok</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- Veriler buraya gelecek. -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        CategoryCall()
+        
+    })
+    $(".deletebtn").click(function () {
+        var id = $(this).data("id")
+        DeleteCategory(id)
+    })
+</script>

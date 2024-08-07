@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/layout.cshtml";
+    ViewData["Title"] = "Products";
+}
+@*
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        ajaxCall();
+    });
+</script> *@
+
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Ürünler</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Veriler</h6>
+        </div>
+        <div class="card-body">
+            <form class="row" action="/" id="search-form">
+
+                <input class="col-3 ml-3 form-control" placeholder="Search" type="type" name="keyword" id="keyword" value="" />
+                <input class="col-3 ml-1 form-control" placeholder="MinStock" type="type" name="minStock" id="minStock" value="" />
+                <input class="col-3 ml-1 form-control" placeholder="MaxStock" type="type" name="maxStock" id="maxStock" value="" />
+                <input class="col-2 ml-2 btn btn-primary btn-icon-split" placeholder="" type="submit" name="name" value="Filtrele" />
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="veriTablosu" width="100%" border="1" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Başlık</th>
+                            <th>Açıklama</th>
+                            <th>Stok Miktarı</th>
+                            <th>Kategori ID</th>
+                            <th>Kategori Adı</th>
+                            <th>Yayın Durumu</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Başlık</th>
+                            <th>Açıklama</th>
+                            <th>Stok Miktarı</th>
+                            <th>Kategori ID</th>
+                            <th>Kategori Adı</th>
+                            <th>Yayın Durumu</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- Veriler buraya gelecek. -->
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+            </div>
+            <div class="card-body">
+                
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+            </div>
+            <div class="card-body">
+                <!-- Basic Card Example -->
+                <!-- Basic Card Example -->
+                <!-- Basic Card Example -->
+                <!-- Basic Card Example -->
+                <!-- Basic Card Example -->
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        ProductCall()
+
+        $("#search-form").submit(function (event) {
+            event.preventDefault();
+            console.log("ss")
+            query=""
+            let search= $("#keyword").val();
+            let minStock = $("#minStock").val();
+            let maxStock = $("#maxStock").val();
+
+            if (search != null && search != "") {
+                query += "keyword=" + search+"&";
+            }
+            if (minStock != null && minStock != "") {
+                query += "minStock=" + minStock+"&";
+            }
+            if (maxStock != null && maxStock != "") {
+                query += "maxStock=" + maxStock;
+            }
+            if (query != "") {
+                query = "/filter?" + query
+            }
+            console.log(query)
+            ProductCall(query)
+            
+        })
+
+
+    })
+
+
+
+    $(".deletebtn").click(function () {
+        var id = $(this).data("id")
+        DeleteProduct(id)
+        console.log("naber");
+    })
+</script>
+
+
+
